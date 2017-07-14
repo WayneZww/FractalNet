@@ -1,9 +1,7 @@
 FractalNet
 ==========
 
-Use the FractalNet of caffe version from `gustavla <https://github.com/gustavla/fractalnet>`__. 
-Add the Windows PowerShell scripts and python scripts to generate the prototext 
-file for caffe with fixing the encoding problem.
+Use the FractalNet of caffe version from `gustavla <https://github.com/gustavla/fractalnet>`__. Add the Windows PowerShell scripts and python scripts to generate the prototext  file for caffe with fixing the encoding problem.
 
 A fractal-based neural network architecture:
 
@@ -12,12 +10,12 @@ A fractal-based neural network architecture:
 
 Drop-path
 ---------
-We provide a reference implementation for the elementwise-mean layer with local
+The auther provide a reference implementation for the elementwise-mean layer with local
 drop-path. There is still no public release of local+global, but we suggest
 implementing this through tying weights. 
 
 Caffe
-~~~~~
+--------
 See the ``caffe`` directory for code and more information.
 
 Fractal pattern generation
