@@ -1,0 +1,70 @@
+:include globals.crox
+:call load-data data label
+# Input size: 32
+:call conv conv2_0 0.0 3 1 64 data conv2_0
+:call conv conv2_1 0.0 3 1 64 conv2_0 conv2_1
+:call conv conv1_0 0.0 3 1 64 data conv1_0
+:call join2 conv1_0 conv2_1 conv2_1_plus
+:call conv conv2_2 0.0 3 1 64 conv2_1_plus conv2_2
+:call conv conv2_3 0.0 3 1 64 conv2_2 conv2_3
+:call conv conv1_1 0.0 3 1 64 conv2_1_plus conv1_1
+:call conv conv0_0 0.0 3 1 64 data conv0_0
+:call pool2 conv0_0 pool0_0
+:call pool2 conv1_1 pool1_1
+:call pool2 conv2_3 pool2_3
+:call join3 pool0_0 pool1_1 pool2_3 pool2_3_plus
+# Reduction: 1, spatial size: 16
+:call conv conv2_4 0.1 3 1 128 pool2_3_plus conv2_4
+:call conv conv2_5 0.1 3 1 128 conv2_4 conv2_5
+:call conv conv1_2 0.1 3 1 128 pool2_3_plus conv1_2
+:call join2 conv1_2 conv2_5 conv2_5_plus
+:call conv conv2_6 0.1 3 1 128 conv2_5_plus conv2_6
+:call conv conv2_7 0.1 3 1 128 conv2_6 conv2_7
+:call conv conv1_3 0.1 3 1 128 conv2_5_plus conv1_3
+:call conv conv0_1 0.1 3 1 128 pool2_3_plus conv0_1
+:call pool2 conv0_1 pool0_1
+:call pool2 conv1_3 pool1_3
+:call pool2 conv2_7 pool2_7
+:call join3 pool0_1 pool1_3 pool2_7 pool2_7_plus
+# Reduction: 2, spatial size: 8
+:call conv conv2_8 0.2 3 1 256 pool2_7_plus conv2_8
+:call conv conv2_9 0.2 3 1 256 conv2_8 conv2_9
+:call conv conv1_4 0.2 3 1 256 pool2_7_plus conv1_4
+:call join2 conv1_4 conv2_9 conv2_9_plus
+:call conv conv2_10 0.2 3 1 256 conv2_9_plus conv2_10
+:call conv conv2_11 0.2 3 1 256 conv2_10 conv2_11
+:call conv conv1_5 0.2 3 1 256 conv2_9_plus conv1_5
+:call conv conv0_2 0.2 3 1 256 pool2_7_plus conv0_2
+:call pool2 conv0_2 pool0_2
+:call pool2 conv1_5 pool1_5
+:call pool2 conv2_11 pool2_11
+:call join3 pool0_2 pool1_5 pool2_11 pool2_11_plus
+# Reduction: 3, spatial size: 4
+:call conv conv2_12 0.3 3 1 512 pool2_11_plus conv2_12
+:call conv conv2_13 0.3 3 1 512 conv2_12 conv2_13
+:call conv conv1_6 0.3 3 1 512 pool2_11_plus conv1_6
+:call join2 conv1_6 conv2_13 conv2_13_plus
+:call conv conv2_14 0.3 3 1 512 conv2_13_plus conv2_14
+:call conv conv2_15 0.3 3 1 512 conv2_14 conv2_15
+:call conv conv1_7 0.3 3 1 512 conv2_13_plus conv1_7
+:call conv conv0_3 0.3 3 1 512 pool2_11_plus conv0_3
+:call pool2 conv0_3 pool0_3
+:call pool2 conv1_7 pool1_7
+:call pool2 conv2_15 pool2_15
+:call join3 pool0_3 pool1_7 pool2_15 pool2_15_plus
+# Reduction: 4, spatial size: 2
+:call conv conv2_16 0.4 3 1 512 pool2_15_plus conv2_16
+:call conv conv2_17 0.4 3 1 512 conv2_16 conv2_17
+:call conv conv1_8 0.4 3 1 512 pool2_15_plus conv1_8
+:call join2 conv1_8 conv2_17 conv2_17_plus
+:call conv conv2_18 0.4 3 1 512 conv2_17_plus conv2_18
+:call conv conv2_19 0.4 3 1 512 conv2_18 conv2_19
+:call conv conv1_9 0.4 3 1 512 conv2_17_plus conv1_9
+:call conv conv0_4 0.4 3 1 512 pool2_15_plus conv0_4
+:call pool2 conv0_4 pool0_4
+:call pool2 conv1_9 pool1_9
+:call pool2 conv2_19 pool2_19
+:call join3 pool0_4 pool1_9 pool2_19 pool2_19_plus
+# Reduction: 5, spatial size: 1
+:call inner prediction0 10 pool2_19_plus prediction0
+:call loss 1.0 prediction0 label loss0
