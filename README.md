@@ -11,8 +11,7 @@ A fractal-based neural network architecture:
 Drop-path
 ---------
 The auther provide a reference implementation for the elementwise-mean layer with local
-drop-path. There is still no public release of local+global, but we suggest
-implementing this through tying weights. 
+drop-path. This project is trying to realize local+global, by tying weights in blocks and globals.crox. 
 
 Caffe
 --------
@@ -28,9 +27,9 @@ Data augmentation
 Try to use the lmdb file as input layer in Caffe to implement data augmentation. 
 The way to build a cifar10 dataset for caffe can been see 
 
-Cite
+reference
 ----
-Please consider citing ::
+Please citing ::
 
     @article{larsson2016fractalnet,
       title={FractalNet: Ultra-Deep Neural Networks without Residuals},
